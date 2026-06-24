@@ -6,7 +6,7 @@
 
 This project focuses on analyzing and forecasting household electricity consumption using advanced machine learning and time series forecasting techniques. The dataset contains measurements of electric power consumption collected from a single household over several years, providing valuable insights into energy usage patterns and enabling the prediction of future electricity demand.
 
-The project explores both traditional statistical forecasting methods and modern machine learning approaches to evaluate their effectiveness in predicting energy consumption.
+The project will explore both traditional statistical forecasting methods and modern machine learning approaches to evaluate their effectiveness in predicting energy consumption.
 
 
 
@@ -98,29 +98,29 @@ PCA was applied to:
 
 ### Kernel PCA
 
-Kernel PCA was used to capture nonlinear relationships within the electrical measurements.
+Kernel PCA will be  used to capture nonlinear relationships within the electrical measurements.
 
 
 
 ## 4. Clustering Analysis
 
-Unsupervised learning techniques were employed to identify consumption patterns.
+Unsupervised learning techniques will be  employed to identify consumption patterns.
 
 ### K-Means Clustering
 
-Used to group periods with similar energy consumption behavior.
+To group periods with similar energy consumption behavior.
 
 ### Hierarchical Clustering
 
-Applied to explore hierarchical relationships between energy usage profiles.
+To explore hierarchical relationships between energy usage profiles.
 
 ### Gaussian Mixture Models (GMM)
 
-Used to identify probabilistic clusters and overlapping consumption patterns.
+To identify probabilistic clusters and overlapping consumption patterns.
 
 ### Kernel Density Estimation (KDE)
 
-Used to estimate the probability distribution of electricity consumption values.
+To estimate the probability distribution of electricity consumption values.
 
 
 
@@ -128,11 +128,11 @@ Used to estimate the probability distribution of electricity consumption values.
 
 ### ARIMA
 
-AutoRegressive Integrated Moving Average was used to model non-seasonal consumption patterns.
+AutoRegressive Integrated Moving Average will be  used to model non-seasonal consumption patterns.
 
 ### SARIMA
 
-Seasonal ARIMA was implemented to capture recurring seasonal behavior.
+Seasonal ARIMA will be implemented to capture recurring seasonal behavior.
 
 ### Evaluation Metrics
 
@@ -148,15 +148,15 @@ Seasonal ARIMA was implemented to capture recurring seasonal behavior.
 
 ### Artificial Neural Network (ANN)
 
-A feedforward neural network was developed for electricity consumption prediction.
+A feedforward neural network will be developed for electricity consumption prediction.
 
 ### Recurrent Neural Network (RNN)
 
-RNN architecture was implemented to capture temporal dependencies.
+RNN architecture will be  implemented to capture temporal dependencies.
 
 ### Long Short-Term Memory (LSTM)
 
-LSTM networks were used to model long-term sequential patterns in electricity consumption data.
+LSTM networks will be used to model long-term sequential patterns in electricity consumption data.
 
 
 
@@ -226,11 +226,11 @@ Measures the proportion of variance explained by the model.
 
 ## Akaike Information Criterion (AIC)
 
-Used for model selection among ARIMA-family models.
+ To be used for model selection among ARIMA-family models.
 
 ## Bayesian Information Criterion (BIC)
 
-Used to evaluate model complexity and goodness of fit.
+To be used to evaluate model complexity and goodness of fit.
 
 
 # Expected Outcomes
@@ -259,7 +259,3 @@ Potential future enhancements include:
 This project demonstrates the application of advanced machine learning, unsupervised learning, time series analysis, and deep learning techniques to household electricity consumption forecasting. By comparing statistical and neural network approaches, the study provides insights into the strengths and limitations of various forecasting methods and contributes toward intelligent energy management systems.
 
 
-
-Advanced Machine Learning Project
-
-Household Electricity Consumption Forecasting and Pattern Analysis using Machine Learning and Deep Learning Models.
