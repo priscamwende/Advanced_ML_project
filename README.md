@@ -1,261 +1,242 @@
-# Advanced_ML_project
+# Household Electricity Consumption Forecasting Using Machine Learning and Deep Learning
 
-# Individual Household Electric Power Consumption Forecasting Using Advanced Machine Learning Models
+##  Project Overview
 
-## Project Overview
+This project develops an end-to-end electricity consumption forecasting system using both **Machine Learning** and **Deep Learning** techniques. The objective is to accurately predict **Global Active Power** consumption by first identifying electricity consumption patterns through clustering and then training forecasting models on engineered time-series features.
 
-This project focuses on analyzing and forecasting household electricity consumption using advanced machine learning and time series forecasting techniques. The dataset contains measurements of electric power consumption collected from a single household over several years, providing valuable insights into energy usage patterns and enabling the prediction of future electricity demand.
-
-The project will explore both traditional statistical forecasting methods and modern machine learning approaches to evaluate their effectiveness in predicting energy consumption.
-
-
-
-## Objectives
-
-The primary objectives of this project are to:
-
-- Analyze household electricity consumption patterns.
-- Perform exploratory data analysis and feature engineering.
-- Apply dimensionality reduction techniques to identify important features.
-- Discover hidden consumption patterns using clustering algorithms.
-- Forecast future electricity consumption using classical time series models.
-- Compare traditional forecasting techniques with deep learning approaches.
-- Evaluate model performance using appropriate forecasting metrics.
+The project combines:
+- Data preprocessing
+- Exploratory Data Analysis (EDA)
+- Feature engineering
+- Dimensionality reduction
+- Clustering
+- Artificial Neural Networks (ANN)
+- Long Short-Term Memory (LSTM)
 
 
+## Dataset
 
-## Dataset Description
+The project uses the **Individual Household Electric Power Consumption** dataset.
 
-### Dataset Name
+The dataset contains household electricity measurements including:
 
-**Individual Household Electric Power Consumption Dataset**
+- Global Active Power
+- Global Reactive Power
+- Voltage
+- Global Intensity
+- Sub-metering 1
+- Sub-metering 2
+- Sub-metering 3
 
-### Dataset Characteristics
-
-The dataset contains measurements collected between December 2006 and November 2010 at a one-minute sampling rate.
-
-### Features
-
-| Feature | Description |
-|----------|------------|
-| Date | Date of observation |
-| Time | Time of observation |
-| Global_active_power | Household global active power (kilowatts) |
-| Global_reactive_power | Household global reactive power (kilowatts) |
-| Voltage | Voltage (volts) |
-| Global_intensity | Current intensity (amperes) |
-| Sub_metering_1 | Kitchen energy consumption |
-| Sub_metering_2 | Laundry room energy consumption |
-| Sub_metering_3 | Water heater and air conditioner energy consumption |
-
-### Target Variable
-
-**Global Active Power**
+The original minute-level data was aggregated into **hourly observations** for forecasting.
 
 
 
-# Methodology
+#  Project Workflow
 
 ## 1. Data Preprocessing
 
-The following preprocessing steps were performed:
+The preprocessing stage included:
 
+- Loading the dataset
+- Combining Date and Time columns
+- Converting to datetime format
+- Setting datetime as the index
 - Handling missing values
-- Converting date and time columns into datetime format
-- Resampling data into hourly or daily intervals
-- Feature scaling and normalization
-- Creating lag features for time series forecasting
+- Removing invalid observations
+- Resampling the data into hourly intervals
+
+---
 
 ## 2. Exploratory Data Analysis (EDA)
 
-The dataset was analyzed to identify:
+The dataset was explored using:
 
-- Daily electricity consumption trends
-- Weekly and seasonal patterns
-- Peak energy usage periods
-- Correlations among electrical variables
-- Distribution of power consumption values
-
-### Visualizations
-
-- Time series plots
+- Missing value analysis
+- Summary statistics
+- Histograms
+- Boxplots
 - Correlation heatmaps
-- Distribution plots
-- Seasonal decomposition plots
+- Time series visualizations
+
+This helped understand consumption patterns and detect outliers.
 
 
 
-## 3. Dimensionality Reduction
+## 3. Feature Scaling
 
-### Principal Component Analysis (PCA)
-
-PCA was applied to:
-
-- Reduce feature dimensionality
-- Eliminate redundant information
-- Improve computational efficiency
-- Visualize feature relationships
-
-### Kernel PCA
-
-Kernel PCA will be  used to capture nonlinear relationships within the electrical measurements.
+RobustScaler was applied to normalize the numerical variables while reducing the effect of outliers.
 
 
 
-## 4. Clustering Analysis
+## 4. Dimensionality Reduction
 
-Unsupervised learning techniques will be  employed to identify consumption patterns.
+Two dimensionality reduction techniques were implemented:
 
-### K-Means Clustering
+- Principal Component Analysis (PCA)
+- Kernel PCA
 
-To group periods with similar energy consumption behavior.
+These methods were used to:
 
-### Hierarchical Clustering
-
-To explore hierarchical relationships between energy usage profiles.
-
-### Gaussian Mixture Models (GMM)
-
-To identify probabilistic clusters and overlapping consumption patterns.
-
-### Kernel Density Estimation (KDE)
-
-To estimate the probability distribution of electricity consumption values.
+- Reduce redundancy
+- Improve clustering
+- Visualize high-dimensional data
 
 
 
-## 5. Time Series Forecasting
+## 5. Clustering
 
-### ARIMA
+Three clustering algorithms were evaluated:
 
-AutoRegressive Integrated Moving Average will be  used to model non-seasonal consumption patterns.
+- K-Means
+- Hierarchical Clustering
+- Gaussian Mixture Model (GMM)
 
-### SARIMA
+The models were compared using:
 
-Seasonal ARIMA will be implemented to capture recurring seasonal behavior.
+- Silhouette Score
+- Calinski-Harabasz Index
+- Davies-Bouldin Index
 
-### Evaluation Metrics
+K-Means achieved the best clustering performance and was selected as the final clustering algorithm.
 
-- Mean Absolute Error (MAE)
-- Root Mean Squared Error (RMSE)
-- R² Score
-- Akaike Information Criterion (AIC)
-- Bayesian Information Criterion (BIC)
+The resulting clusters represented different electricity consumption regimes:
 
+- Low Consumption
+- Medium Consumption
+- High Consumption
 
+## 6. Feature Engineering
 
-## 6. Deep Learning Models
+Additional predictive variables were created.
+
+### Time Features
+
+- Hour
+- Day
+- Month
+- Day of Week
+
+### Lag Features
+
+Historical electricity consumption values were included:
+
+- lag1
+- lag2
+- lag3
+- lag24
+
+These lag variables enable the forecasting models to learn historical consumption patterns.
+
+## 7. Forecasting Models
 
 ### Artificial Neural Network (ANN)
 
-A feedforward neural network will be developed for electricity consumption prediction.
-
-### Recurrent Neural Network (RNN)
-
-RNN architecture will be  implemented to capture temporal dependencies.
+The ANN model learns nonlinear relationships between the engineered features and electricity consumption.
 
 ### Long Short-Term Memory (LSTM)
 
-LSTM networks will be used to model long-term sequential patterns in electricity consumption data.
+The LSTM model is specifically designed for time-series forecasting and captures temporal dependencies in electricity consumption.
+
+#  Model Evaluation
+
+The forecasting models were evaluated using:
+
+### Mean Absolute Error (MAE)
+
+- Lower values indicate better prediction accuracy.
+- Measures the average prediction error.
+
+### Root Mean Squared Error (RMSE)
+
+- Lower values indicate better performance.
+- Penalizes larger prediction errors more heavily.
+
+### Coefficient of Determination (R²)
+
+- Higher values indicate better performance.
+- Measures how well the model explains the variability in electricity consumption.
+
+#  Results
+
+| Model | MAE | RMSE | R² |
+|-------|------:|------:|------:|
+| ANN | 0.079372 | 0.109230 | 0.977501 |
+| **LSTM** | **0.019101** | **0.029317** | **0.998379** |
+
+##  Best Model
+
+The **LSTM** achieved the best forecasting performance because it produced:
+
+- The lowest Mean Absolute Error (MAE)
+- The lowest Root Mean Squared Error (RMSE)
+- The highest R² score
+
+This demonstrates that LSTM is more effective than ANN for forecasting household electricity consumption.
+
+
+# Libraries Used
+
+```python
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+tensorflow
+keras
+scipy
+```
 
 
 
-# Model Comparison
+#  Project Pipeline
 
-| Model | Category |
-|---------|---------|
-| ARIMA | Statistical |
-| SARIMA | Statistical |
-| ANN | Deep Learning |
-| RNN | Deep Learning |
-| LSTM | Deep Learning |
-
-Models were compared based on:
-
-- Forecasting accuracy
-- Error metrics
-- Computational efficiency
-- Ability to capture seasonality
-
-# Technologies Used
-
-## Programming Language
-
-- Python
-
-## Libraries
-
-### Data Processing
-
-- Pandas
-- NumPy
-
-### Visualization
-
-- Matplotlib
-- Seaborn
-- Plotly
-
-### Machine Learning
-
-- Scikit-Learn
-
-### Time Series Analysis
-
-- Statsmodels
-- pmdarima
-
-### Deep Learning
-
-- TensorFlow
-- Keras
-
-# Evaluation Metrics
-
-## Mean Absolute Error (MAE)
-
-Measures the average magnitude of prediction errors.
-
-## Root Mean Squared Error (RMSE)
-
-Measures the standard deviation of prediction errors.
-
-## R² Score
-
-Measures the proportion of variance explained by the model.
-
-## Akaike Information Criterion (AIC)
-
- To be used for model selection among ARIMA-family models.
-
-## Bayesian Information Criterion (BIC)
-
-To be used to evaluate model complexity and goodness of fit.
+```
+Data Loading
+      │
+      ▼
+Data Cleaning
+      │
+      ▼
+Exploratory Data Analysis
+      │
+      ▼
+Feature Scaling
+      │
+      ▼
+PCA & Kernel PCA
+      │
+      ▼
+K-Means Clustering
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+Train/Test Split
+      │
+      ▼
+ANN Model
+      │
+      ▼
+LSTM Model
+      │
+      ▼
+Model Evaluation
+      │
+      ▼
+Model Comparison
+```
 
 
-# Expected Outcomes
 
-This project aims to:
+#  Conclusion
 
-- Accurately forecast future household electricity consumption.
-- Identify hidden patterns in energy usage behavior.
-- Compare classical time series methods with deep learning techniques.
-- Provide insights that support energy management and demand planning.
+This project presents a complete machine learning pipeline for forecasting household electricity consumption.
+
+By combining clustering, feature engineering, and deep learning, highly accurate electricity consumption forecasts were achieved. Both ANN and LSTM models were trained and evaluated, with the LSTM consistently outperforming the ANN across all evaluation metrics. The findings demonstrate that LSTM is well suited for time-series forecasting due to its ability to learn temporal dependencies in sequential data.
 
 
-# Future Improvements
-
-Potential future enhancements include:
-
-- Incorporating weather data
-- Integrating smart meter data from multiple households
-- Implementing Transformer-based forecasting models
-- Real-time energy demand prediction
-- Energy anomaly detection
-
-
-# Conclusion
-
-This project demonstrates the application of advanced machine learning, unsupervised learning, time series analysis, and deep learning techniques to household electricity consumption forecasting. By comparing statistical and neural network approaches, the study provides insights into the strengths and limitations of various forecasting methods and contributes toward intelligent energy management systems.
 
 
