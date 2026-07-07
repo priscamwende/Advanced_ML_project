@@ -1,198 +1,153 @@
-# Household Electricity Consumption Forecasting Using Machine Learning and Deep Learning
+# Household Electricity Consumption Profiling and Forecasting
+### **Project Overview**
 
-##  Project Overview
+This project develops an end-to-end household electricity consumption analysis and forecasting system using Machine Learning and Time Series Forecasting techniques. The objective is to identify household electricity consumption patterns through clustering and accurately forecast future Global Active Power consumption using a Seasonal ARIMA (SARIMA) model.
 
-This project develops an end-to-end electricity consumption forecasting system using both **Machine Learning** and **Deep Learning** techniques. The objective is to accurately predict **Global Active Power** consumption by first identifying electricity consumption patterns through clustering and then training forecasting models on engineered time-series features.
+**The project combines:**
 
-The project combines:
 - Data preprocessing
 - Exploratory Data Analysis (EDA)
-- Feature engineering
+- Feature scaling
 - Dimensionality reduction
 - Clustering
-- Artificial Neural Networks (ANN)
-- Long Short-Term Memory (LSTM)
+- Time series forecasting
+- Interactive Streamlit deployment
 
+**Dataset**
 
-## Dataset
-
-The project uses the **Individual Household Electric Power Consumption** dataset.
+The project uses the Individual Household Electric Power Consumption dataset.
 
 The dataset contains household electricity measurements including:
 
-- Global Active Power
-- Global Reactive Power
-- Voltage
-- Global Intensity
-- Sub-metering 1
-- Sub-metering 2
-- Sub-metering 3
+* Global Active Power
+* Global Reactive Power
+* Voltage
+* Global Intensity
+* Sub-metering 1
+* Sub-metering 2
+* Sub-metering 3
 
-The original minute-level data was aggregated into **hourly observations** for forecasting.
+The original minute-level data was aggregated into hourly observations for clustering and forecasting.
 
-
-
-#  Project Workflow
-
-## 1. Data Preprocessing
+#### **Project Workflow**
+***1. Data Preprocessing***
 
 The preprocessing stage included:
 
-- Loading the dataset
-- Combining Date and Time columns
-- Converting to datetime format
-- Setting datetime as the index
-- Handling missing values
-- Removing invalid observations
-- Resampling the data into hourly intervals
+* Loading the dataset
+*  Combining Date and Time columns
+*  Converting to datetime format
+*  Setting datetime as the index
+*  Handling missing values
+*  Removing invalid observations
+*  Resampling the data into hourly intervals
 
----
-
-## 2. Exploratory Data Analysis (EDA)
+2. ***Exploratory Data Analysis (EDA)***
 
 The dataset was explored using:
 
-- Missing value analysis
-- Summary statistics
-- Histograms
-- Boxplots
-- Correlation heatmaps
-- Time series visualizations
+* Missing value analysis
+* Summary statistics
+* Histograms
+* Boxplots
+* Correlation heatmaps
+* Time-series visualizations
 
-This helped understand consumption patterns and detect outliers.
+This helped identify consumption trends, seasonal patterns, and potential outliers.
 
+***3. Feature Scaling***
 
+StandardScaler was applied to standardize all numerical variables before dimensionality reduction and clustering. This ensured that features measured on different scales contributed equally to the analysis.
 
-## 3. Feature Scaling
-
-RobustScaler was applied to normalize the numerical variables while reducing the effect of outliers.
-
-
-
-## 4. Dimensionality Reduction
+***4. Dimensionality Reduction***
 
 Two dimensionality reduction techniques were implemented:
 
-- Principal Component Analysis (PCA)
-- Kernel PCA
+* Principal Component Analysis (PCA)
+* Kernel PCA
 
 These methods were used to:
 
-- Reduce redundancy
-- Improve clustering
-- Visualize high-dimensional data
-
-
-
-## 5. Clustering
+* Reduce feature redundancy
+* Capture nonlinear relationships
+* Improve clustering performance
+* Visualize high-dimensional data
+  
+***5. Clustering***
 
 Three clustering algorithms were evaluated:
 
-- K-Means
-- Hierarchical Clustering
-- Gaussian Mixture Model (GMM)
+* K-Means
+* Hierarchical Clustering
+* Gaussian Mixture Model (GMM)
 
-The models were compared using:
+The clustering models were compared using:
 
-- Silhouette Score
-- Calinski-Harabasz Index
-- Davies-Bouldin Index
+* Silhouette Score
+* Calinski-Harabasz Index
+* Davies-Bouldin Index
 
-K-Means achieved the best clustering performance and was selected as the final clustering algorithm.
+*K-Means achieved the best overall performance and was selected as the final clustering model.*
 
-The resulting clusters represented different electricity consumption regimes:
+The resulting household consumption regimes were:
 
-- Low Consumption
-- Medium Consumption
-- High Consumption
+- Very Low
+- Low
+- Low-Medium
+- Medium
+- High
+  
+***6. Time Series Forecasting***
 
-## 6. Feature Engineering
+A Seasonal ARIMA (SARIMA) model was developed to forecast future Global Active Power consumption.
 
-Additional predictive variables were created.
+*The forecasting workflow included:*
 
-### Time Features
+* Stationarity testing
+* Seasonal decomposition
+* Model selection
+* Residual diagnostics
+* Future electricity demand prediction
+* Model Evaluation
 
-- Hour
-- Day
-- Month
-- Day of Week
+The forecasting model was evaluated using:
 
-### Lag Features
+- Mean Absolute Error (MAE)
+Measures the average prediction error.
 
-Historical electricity consumption values were included:
+- Root Mean Squared Error (RMSE)
+Measures prediction accuracy while giving greater weight to larger errors.
 
-- lag1
-- lag2
-- lag3
-- lag24
+- Coefficient of Determination (R²)
+Measures how well the model explains the variation in electricity consumption.
 
-These lag variables enable the forecasting models to learn historical consumption patterns.
+Residual diagnostics, including histogram, Q-Q plot, and autocorrelation analysis, were also performed to assess model adequacy.
 
-## 7. Forecasting Models
+### Results
 
-### Artificial Neural Network (ANN)
+**Clustering**
 
-The ANN model learns nonlinear relationships between the engineered features and electricity consumption.
+K-Means produced the best clustering performance among the evaluated algorithms.
+Households were successfully grouped into five meaningful electricity consumption regimes.
+The resulting clusters support customer segmentation and personalized energy management.
 
-### Long Short-Term Memory (LSTM)
+**Forecasting**
+The SARIMA model successfully captured both trend and seasonality in household electricity consumption.
+Residual diagnostics indicated that the model adequately explained the temporal structure of the data.
+The forecasting model can be used to estimate future electricity demand and support energy planning.
 
-The LSTM model is specifically designed for time-series forecasting and captures temporal dependencies in electricity consumption.
+#### Libraries Used
 
-#  Model Evaluation
+- pandas
+- numpy
+- matplotlib
+- scikit-learn
+- statsmodels
+- joblib
+- streamlit
+- reportlab
 
-The forecasting models were evaluated using:
-
-### Mean Absolute Error (MAE)
-
-- Lower values indicate better prediction accuracy.
-- Measures the average prediction error.
-
-### Root Mean Squared Error (RMSE)
-
-- Lower values indicate better performance.
-- Penalizes larger prediction errors more heavily.
-
-### Coefficient of Determination (R²)
-
-- Higher values indicate better performance.
-- Measures how well the model explains the variability in electricity consumption.
-
-#  Results
-
-| Model | MAE | RMSE | R² |
-|-------|------:|------:|------:|
-| ANN | 0.079372 | 0.109230 | 0.977501 |
-| **LSTM** | **0.019101** | **0.029317** | **0.998379** |
-
-##  Best Model
-
-The **LSTM** achieved the best forecasting performance because it produced:
-
-- The lowest Mean Absolute Error (MAE)
-- The lowest Root Mean Squared Error (RMSE)
-- The highest R² score
-
-This demonstrates that LSTM is more effective than ANN for forecasting household electricity consumption.
-
-
-# Libraries Used
-
-```python
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-tensorflow
-keras
-scipy
-```
-
-
-
-#  Project Pipeline
-
-```
+#### Project Pipeline
 Data Loading
       │
       ▼
@@ -202,41 +157,66 @@ Data Cleaning
 Exploratory Data Analysis
       │
       ▼
-Feature Scaling
+Feature Scaling (StandardScaler)
       │
       ▼
 PCA & Kernel PCA
       │
       ▼
+Cluster Evaluation
+      │
+      ▼
 K-Means Clustering
       │
       ▼
-Feature Engineering
+Household Consumption Profiling
       │
       ▼
-Train/Test Split
+Time Series Analysis
       │
       ▼
-ANN Model
-      │
-      ▼
-LSTM Model
+SARIMA Forecasting
       │
       ▼
 Model Evaluation
       │
       ▼
-Model Comparison
-```
+Streamlit Deployment
 
+#### **Streamlit Application**
 
+The project includes an interactive Streamlit application with two modules:
 
-#  Conclusion
+**Household Consumption Profiling**
 
-This project presents a complete machine learning pipeline for forecasting household electricity consumption.
+Users can:
 
-By combining clustering, feature engineering, and deep learning, highly accurate electricity consumption forecasts were achieved. Both ANN and LSTM models were trained and evaluated, with the LSTM consistently outperforming the ANN across all evaluation metrics. The findings demonstrate that LSTM is well suited for time-series forecasting due to its ability to learn temporal dependencies in sequential data.
+1. Enter household electricity measurements.
+2. Predict the household's electricity consumption regime.
+3. View personalized interpretations and energy-saving recommendations.
+4. Download a PDF report.
 
+**Electricity Forecasting**
+
+Users can:
+
+1. Generate future electricity consumption forecasts.
+2. Visualize predicted electricity demand.
+3. Download forecast results as a CSV file.
+   
+### **Business Value**
+
+The project helps electricity providers:
+
+1. Understand household electricity consumption behaviour.
+2. Forecast future electricity demand more accurately.
+3. Improve energy planning and resource allocation.
+4. Design targeted energy efficiency programs.
+5. Enhance grid reliability through data-driven decision-making.
+
+#### **Conclusion**
+
+This project presents a complete machine learning and time series forecasting framework for household electricity consumption analysis. By combining PCA, Kernel PCA, K-Means clustering, and SARIMA forecasting, the project successfully identifies household consumption regimes and predicts future electricity demand. The accompanying Streamlit application makes these insights accessible through an interactive interface, supporting smarter energy management and operational decision-making.
 
 
 
