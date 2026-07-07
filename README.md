@@ -149,19 +149,20 @@ The forecasting model can be used to estimate future electricity demand and supp
 
 #### Project Pipeline
 
+```text
 Data Loading
       │
       ▼
 Data Cleaning
       │
       ▼
-Exploratory Data Analysis
+Exploratory Data Analysis (EDA)
       │
       ▼
 Feature Scaling (StandardScaler)
       │
       ▼
-PCA & Kernel PCA
+Dimensionality Reduction (PCA & Kernel PCA)
       │
       ▼
 Cluster Evaluation
@@ -182,7 +183,8 @@ SARIMA Forecasting
 Model Evaluation
       │
       ▼
-Streamlit Deployment
+Streamlit Application Deployment
+```
 
 #### **Streamlit Application**
 
