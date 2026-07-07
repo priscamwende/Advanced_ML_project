@@ -148,6 +148,7 @@ The forecasting model can be used to estimate future electricity demand and supp
 - reportlab
 
 #### Project Pipeline
+
 Data Loading
       │
       ▼
